@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Current as Touch: Proprioceptive Contact Feedback for Compliant Dexterous Manipulation.">
+    <meta property="og:title" content="Current as Touch">
+    <meta property="og:description" content="Learning tactile-like contact feedback from motor current for compliant dexterous manipulation.">
+    <meta property="og:image" content="assets/img/teaser_ad_v1.png">
+    <title>Current as Touch</title>
+    <link rel="stylesheet" href="assets/site.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#">Current as Touch</a>
+      <nav aria-label="Primary navigation">
+        <a href="#abstract">Abstract</a>
+        <a href="#video">Video</a>
+        <a href="#experiments">Experiments</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-media" aria-hidden="true">
+          <video autoplay muted loop playsinline preload="metadata" poster="assets/img/draw-current.jpg">
+            <source src="assets/videos/draw_cards_current_v1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="hero-content">
+          <p class="venue">CoRL 2026 Submission</p>
+          <h1>Current as Touch</h1>
+          <p class="subtitle">Proprioceptive Contact Feedback for Compliant Dexterous Manipulation</p>
+        </div>
+      </section>
+
+      <section class="section teaser">
+        <img src="assets/img/teaser_ad_v1.png" alt="Current as Touch teaser overview.">
+      </section>
+
+      <section id="abstract" class="abstract section">
+        <h2>Abstract</h2>
+        <p>
+          Compliance is essential for dexterous manipulation, yet existing solutions often rely on external tactile or force sensors that are costly, fragile, and difficult to deploy on low-cost robot hands. We propose a proprioception-driven framework that learns tactile-like contact feedback from motor current and joint states. Since motor current is closely related to actuator torque, it provides an intrinsic signal for perceiving contact force, object resistance, and grasp stability without additional sensing hardware. Rather than estimating external wrenches or commanding torque, our method predicts a compliance reference position: an ideal joint-position target for a standard PD controller whose induced position error generates appropriate grasping force. This position-based formulation is compatible with mainstream teleoperation and policy-learning pipelines, while enabling the robot to adapt interaction forces from real-time proprioceptive feedback. Experiments on multiple dexterous hands and contact-rich tasks show stable compliant grasping, safer and more efficient teleoperation, and improved downstream policy learning without external tactile sensors.
+        </p>
+      </section>
+
+      <section class="section framework">
+        <h2>Model Framework</h2>
+        <figure>
+          <img src="assets/img/pipeline_v4.png" alt="Current-conditioned compliance reference prediction model framework.">
+        </figure>
+      </section>
+
+      <section id="video" class="section main-video">
+        <h2>Overview Video</h2>
+        <video controls preload="metadata" poster="assets/img/teaser_ad_v1.png">
+          <source src="assets/videos/introduction-3min-web.mp4" type="video/mp4">
+        </video>
+      </section>
+
+      <section id="experiments" class="section experiments">
+        <div class="section-intro">
+          <h2>Experiments</h2>
+          <p>Contact-Rich Manipulation Tasks</p>
+        </div>
+
+        <article class="experiment">
+          <div class="experiment-copy">
+            <p class="section-kicker">Teleoperation</p>
+            <h2>Foam-Cup Stacking</h2>
+            <p>Current-conditioned compliance reference prediction reduces object damage while preserving fast teleoperation.</p>
+            <div class="metric-pair">
+              <div><span>w/o Current</span><strong>15.0%</strong><p>novice cup deformation</p></div>
+              <div><span>w/ Current</span><strong>0.0%</strong><p>novice cup deformation</p></div>
+            </div>
+          </div>
+          <div class="experiment-media">
+            <video controls preload="metadata" poster="assets/img/grasp-current.jpg">
+              <source src="assets/videos/teleop_foam_cup_3x.mp4" type="video/mp4">
+            </video>
+            <div class="compare">
+              <figure><img src="assets/img/grasp-no-current.jpg" alt="Foam cup grasping without current."><figcaption>w/o Current</figcaption></figure>
+              <figure><img src="assets/img/grasp-current.jpg" alt="Foam cup grasping with current."><figcaption>w/ Current</figcaption></figure>
+            </div>
+          </div>
+        </article>
+
+        <article class="experiment">
+          <div class="experiment-copy">
+            <p class="section-kicker">Teleoperation</p>
+            <h2>Whiteboard Wiping</h2>
+            <p>Motor current helps maintain sustained surface contact against changing board interaction.</p>
+            <div class="metric-pair">
+              <div><span>w/o Current</span><strong>46.7%</strong><p>novice success</p></div>
+              <div><span>w/ Current</span><strong>100%</strong><p>novice success</p></div>
+            </div>
+          </div>
+          <div class="experiment-media">
+            <video controls preload="metadata" poster="assets/img/wipe-current.jpg">
+              <source src="assets/videos/teleop_wipe_whiteboard_2x.mp4" type="video/mp4">
+            </video>
+            <div class="compare">
+              <figure><img src="assets/img/wipe-no-current.jpg" alt="Whiteboard wiping without current."><figcaption>w/o Current</figcaption></figure>
+              <figure><img src="assets/img/wipe-current.jpg" alt="Whiteboard wiping with current."><figcaption>w/ Current</figcaption></figure>
+            </div>
+          </div>
+        </article>
+
+        <article class="experiment">
+          <div class="experiment-copy">
+            <p class="section-kicker">Policy Learning</p>
+            <h2>Single-Card Picking</h2>
+            <p>Current provides contact evidence for retrieving exactly one thin object instead of over-pressing the deck.</p>
+            <div class="metric-pair">
+              <div><span>w/o Current</span><strong>55.8%</strong><p>strict success</p></div>
+              <div><span>w/ Current</span><strong>76.9%</strong><p>strict success</p></div>
+            </div>
+          </div>
+          <div class="experiment-media">
+            <video controls preload="metadata" poster="assets/img/draw-current.jpg">
+              <source src="assets/videos/draw_cards_current_v1.mp4" type="video/mp4">
+            </video>
+            <div class="compare">
+              <figure><img src="assets/img/draw-no-current.jpg" alt="Single-card picking without current."><figcaption>w/o Current</figcaption></figure>
+              <figure><img src="assets/img/draw-current.jpg" alt="Single-card picking with current."><figcaption>w/ Current</figcaption></figure>
+            </div>
+          </div>
+        </article>
+
+        <article class="experiment">
+          <div class="experiment-copy">
+            <p class="section-kicker">Policy Learning</p>
+            <h2>Dynamic Bottle Holding</h2>
+            <p>Load-sensitive motor current lets the grasp adapt as water is poured into the bottle.</p>
+            <div class="metric-pair">
+              <div><span>w/o Current</span><strong>16.7%</strong><p>stable at 250 g</p></div>
+              <div><span>w/ Current</span><strong>100%</strong><p>stable at 250 g</p></div>
+            </div>
+          </div>
+          <div class="experiment-media">
+            <video controls preload="metadata" poster="assets/img/pour-current.jpg">
+              <source src="assets/videos/hold_cup_2x.mp4" type="video/mp4">
+            </video>
+            <div class="compare compare-bottle">
+              <figure class="slip-callout"><img src="assets/img/pour-no-current.jpg" alt="Dynamic bottle holding without current."><figcaption>w/o Current</figcaption><span class="slip-label">slipped to table</span><span class="table-contact" aria-hidden="true"></span></figure>
+              <figure><img src="assets/img/pour-current.jpg" alt="Dynamic bottle holding with current."><figcaption>w/ Current</figcaption></figure>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
